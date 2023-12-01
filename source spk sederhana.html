@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SISTEM PENDUKUNG KEPUTUSAN SEDERHANA</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    #result {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Penilaian untuk Peserta Seleksi Nomor 112</h2>
+  <form id="checkboxForm">
+    <label for="checkbox1">
+	<h4>Penampilan peserta</h4>
+      <input type="checkbox" id="checkbox1" class="checkbox" value="20"> Cara berpenampilan baik
+	  <input type="checkbox" id="checkbox1" class="checkbox" value="10"> Cara berpenampilan kurang baik
+    </label>
+    <br>
+	<label for="checkbox2">
+	<h4>Dokumen lamaran kerja</h4>
+      <input type="checkbox" id="checkbox2" class="checkbox" value="15"> Lamaran kerja sesuai standart
+	  <input type="checkbox" id="checkbox2" class="checkbox" value="5"> Lamaran kerja kurang rapi
+    </label>
+    <br>
+    <label for="checkbox3">
+	<h4>Kelulusan test tulis</h4>
+      <input type="checkbox" id="checkbox3" class="checkbox" value="25"> Hasil nilai ujian memenuhi ambang batas
+	  <input type="checkbox" id="checkbox3" class="checkbox" value="15"> Hasil nilai ujian tidak memenuhi ambang batas
+    </label>
+    <br>
+    <label for="checkbox4">
+	<h4>Performa saat wawancara</h4>
+      <input type="checkbox" id="checkbox4" class="checkbox" value="30"> Wawancara Sempurna
+	  <input type="checkbox" id="checkbox4" class="checkbox" value="15"> Wawancara kurang sempurna
+    </label>
+    <br>
+    <label for="checkbox5">
+	<h4>Kemampuan teknis</h4>
+      <input type="checkbox" id="checkbox5" class="checkbox" value="10"> Skill dibutuhkan
+	  <input type="checkbox" id="checkbox5" class="checkbox" value="5"> Skill kurang dibutuhkan
+    </label>
+
+    <div id="result">Total: 0</div>
+    <div id="status"></div>
+  </form>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var checkboxes = document.querySelectorAll('.checkbox');
+      var resultElement = document.getElementById('result');
+      var statusElement = document.getElementById('status');
+
+      checkboxes.forEach(function (checkbox) {
+        checkbox.addEventListener('change', function () {
+          updateResult();
+        });
+      });
+
+      function updateResult() {
+        var total = 0;
+
+        checkboxes.forEach(function (checkbox) {
+          if (checkbox.checked) {
+            total += parseInt(checkbox.value, 10);
+          }
+        });
+
+        resultElement.textContent = 'Total: ' + total;
+
+        // Penilaian kelulusan
+        if (total >= 80) {
+          statusElement.textContent = 'Status: Lulus';
+        } else if (total >= 60) {
+          statusElement.textContent = 'Status: Mengulang';
+        } else {
+          statusElement.textContent = 'Status: Tidak Lulus';
+        }
+      }
+    });
+  </script>
+
+</body>
+</html>
